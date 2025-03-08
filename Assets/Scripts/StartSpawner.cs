@@ -7,9 +7,9 @@ public class StartSpawner : MonoBehaviour
     [Header ("Configuration of the spawn")]
     public GameObject startPrefab; // Prefab of the stars
     public int poolsize = 10; // Number of stars
-    public float unSpawnRate = 0.9f; // Every second spawn a star
-    public Vector2 spawnRangeX = new Vector2(-4.2f, 6.2f); // Limit to spawn X 
-    public Vector2 spawnRangeY = new Vector2(-7.50f, 7.50f); // Limit to spawn Y
+    public float unSpawnRate = 0.7f; // Every second spawn a star
+    public Vector2 spawnRangeX = new Vector2(- 7.50f, 7.50f); // Limit to spawn X 
+    public Vector2 spawnRangeY = new Vector2(-4.2f, 6.2f); // Limit to spawn Y
 
     private Queue<GameObject> starPool;
     private float timer;
