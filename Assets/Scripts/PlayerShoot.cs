@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
@@ -42,5 +40,6 @@ public class PlayerShoot : MonoBehaviour
         {
             shootDirection = (horizontal > 0) ? Vector2.right : Vector2.left; // Set the direction of the bullet
         }
-    }
+        else shootDirection = Vector2.right; // Set the direction of the bullet
+    }       
 }
