@@ -7,7 +7,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Enemy Status")]
     public float health; // Health of the enemy
     public float damage; // Damage of the enemy
-    public float speed; // Damage of the enemy
+    public float speed; // Speed of the enemy
     public int scorePoints; // Score given when the enemy is defeated
 
 
@@ -37,11 +37,9 @@ public abstract class Enemy : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
             TakeDamage(10f); // Puedes ajustar el daño
-            Destroy(other.gameObject);
         }
         else if (other.CompareTag("MapLimit"))
         {
-            Debug.Log("Map Limit");
             HandleMapCollision();
         }
     }

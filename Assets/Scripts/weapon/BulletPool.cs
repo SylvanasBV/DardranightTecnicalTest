@@ -27,7 +27,7 @@ public class BulletPool : MonoBehaviour
         // Create the pool of bullets
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject bullet = Instantiate(bulletPrefab);
+            GameObject bullet = Instantiate(bulletPrefab,this.transform);
             bullet.SetActive(false);
             bulletPool.Add(bullet);
         }
@@ -41,13 +41,13 @@ public class BulletPool : MonoBehaviour
             // Get the bullet from the pool
             if (!bullet.activeInHierarchy)// Verify if the bullet is unActive
             {
-                bullet.SetActive(false);// Deactivate the bullet
+                bullet.SetActive(true);// Deactivate the bullet
                 return bullet;// Return the bullet
 
             }
         }
 
-        GameObject newBullet = Instantiate(bulletPrefab);// Create a new bullet
+        GameObject newBullet = Instantiate(bulletPrefab,this.transform);// Create a new bullet
         bulletPool.Add(newBullet);// Add the bullet to the pool
         return newBullet;// Return the bullet
     }
