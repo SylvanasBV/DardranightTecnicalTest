@@ -2,13 +2,18 @@ using UnityEngine;
 
 public class BulletEnemy : MonoBehaviour
 {
-    public int defaultDamage = 10; // Default damage of the bullet
+    private Enemy shooter; // Enemy that shoots the bullet
+    private int damage; // Damage of the bullet
+    public void SetShooter (Enemy enemy, int bulletDamage)
+    {
+        shooter = enemy;
+        damage = bulletDamage;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            int damage = GetDamageFromEnemy();
-            GameManager.instanceGameManager.TakeDamage(10); //Damage to the player
+            GameManager.instanceGameManager.TakeDamage(damage); //Damage to the player
             Destroy(gameObject); // be destroyed when it touches the player
         }
         else if (other.CompareTag("MapLimit"))
@@ -17,9 +22,4 @@ public class BulletEnemy : MonoBehaviour
         }
     }
 
-    private int GetDamageFromEnemy()
-    {
-        Enemy enemy = GetComponentInParent<Enemy>();
-        return enemy != null ? (int)enemy.damage : defaultDamage;
-    }
 }

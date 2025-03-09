@@ -3,7 +3,6 @@ using UnityEngine;
 public class EnemyMedium : Enemy
 {
     public Transform firePointUp,firePointDown; // Fire point of the enemy
-    public GameObject bulletPrefab; // Bullet prefab
     public float fireRate = 1f; // Fire rate of the enemy
     public float zigzagWidth = 14f; // Width of the zigzag movement
 
@@ -39,16 +38,15 @@ public class EnemyMedium : Enemy
         }
     }
 
-    private void Shoot()
+    protected override void Shoot()
     {
         if (player == null) return; //if can't found the player, leave the function
 
         float directionY = Mathf.Sign(player.position.y - firePointUp.position.y);// Verify if the ship is up or down
 
-        GameObject bulletUp = Instantiate(bulletPrefab, firePointUp.position, Quaternion.Euler(new Vector3(0,0,90))); //Instance the Bullet
-        bulletUp.GetComponent<Rigidbody2D>().velocity = new Vector2(-5f, directionY * 3f); // Shoot the bullet
+        Vector2 velocity = new Vector2(-5f, directionY * 3f);
 
-        GameObject bulletDown = Instantiate(bulletPrefab, firePointDown.position, Quaternion.Euler(new Vector3(0, 0, 90)));//Instance the Bullet
-        bulletDown.GetComponent<Rigidbody2D>().velocity = new Vector2(-5f, directionY * 3f);// Shoot the bullet
+        FireBullet(firePointUp.position, velocity, 90);
+        FireBullet(firePointDown.position, velocity, 90);
     }
 }

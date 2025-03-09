@@ -8,6 +8,8 @@ public abstract class Enemy : MonoBehaviour
     public float damage; // Damage of the enemy
     public float speed; // Speed of the enemy
     public int scorePoints; // Score given when the enemy is defeated
+    public GameObject bulletPrefab; // Bullet prefab
+
 
 
     protected Rigidbody rb; // Rigidbody of the enemy
@@ -21,6 +23,18 @@ public abstract class Enemy : MonoBehaviour
     }
 
     protected abstract void Move(); // To define the movement of the especific enemy
+
+    protected abstract void Shoot();// To define the shoot of the especific enemy
+
+    protected void FireBullet(Vector2 position, Vector2 velocity, int angle) // To shoot a bullet
+    {
+        GameObject bullet = Instantiate(bulletPrefab, position, Quaternion.Euler(0,0,angle)); // Instantiate the bullet
+        BulletEnemy bulletScript = bullet.GetComponent<BulletEnemy>();// Get the BulletEnemy component
+        if (bulletScript != null)
+            bulletScript.SetShooter(this, (int)damage); // take the reference of the enemy and the damage
+
+        bullet.GetComponent<Rigidbody2D>().velocity = velocity;// Shoot the bullet
+    }
 
     public virtual void TakeDamage(float amount) // To take damage
     {

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class EnemyBig : Enemy
 {
-    public GameObject bulletPrefab; // Bullet prefab
     public Transform firePoint; // Fire point of the enemy
     public float fireRate = 1f; // Fire rate of the enemy
     private float nextFire; // Time to the next fire
@@ -24,7 +23,7 @@ public class EnemyBig : Enemy
         /*if(player == null) return; // If can't found the player, leave the function
         Vector3 direction = (player.position - transform.position).normalized; // Define the direction of the movement
         rb.MovePosition(rb.position + direction * speed * Time.deltaTime);*/
-        Vector2 direction = (player.position - transform.position).normalized;
+        Vector2 direction = (player.position - transform.position).normalized;// Define the direction of the movement
         transform.position += (Vector3)direction * speed * Time.deltaTime; // Movimiento sin Rigidbody2D
     }
 
@@ -43,12 +42,11 @@ public class EnemyBig : Enemy
         }
     }
 
-    private void Shoot()
+    protected override void Shoot()
     {
         Vector2 direction = (player.position - transform.position).normalized; // Define the direction of the movement
         float directionX = Mathf.Sign(player.position.x - transform.position.x);// Verify if the ship is left or rigth
         int angle = directionX > 0 ? -90 : 90; // Define the rotation of the bullet
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(new Vector3(0, 0, angle))); // Instantiate the bullet
-        bullet.GetComponent<Rigidbody2D>().velocity = direction * 5f; // Shoot to the player
+        FireBullet(firePoint.position, direction * 5f, angle);
     }
 }
