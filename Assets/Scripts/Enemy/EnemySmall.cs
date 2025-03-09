@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySmall : Enemy
@@ -45,7 +43,7 @@ public class EnemySmall : Enemy
         Vector2 direction = movingRight ? Vector2.right: Vector2.left; // Define the direction of the bullet
         int rotation = movingRight ? -90 : 90; // Define the rotation of the bullet
 
-        Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0,0,rotation))// Instantiate the bullet
+        Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0,0,rotation),this.transform)// Instantiate the bullet
             .GetComponent<Rigidbody2D>().velocity = direction * 5f; // shoot to the left
     }
 }

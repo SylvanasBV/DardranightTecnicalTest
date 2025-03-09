@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyMedium : Enemy
@@ -48,10 +45,10 @@ public class EnemyMedium : Enemy
 
         float directionY = Mathf.Sign(player.position.y - firePointUp.position.y);// Verify if the ship is up or down
 
-        GameObject bulletUp = Instantiate(bulletPrefab, firePointUp.position, Quaternion.Euler(new Vector3(0,0,90)));
-        bulletUp.GetComponent<Rigidbody2D>().velocity = new Vector2(-5f, directionY * 3f);
+        GameObject bulletUp = Instantiate(bulletPrefab, firePointUp.position, Quaternion.Euler(new Vector3(0,0,90))); //Instance the Bullet
+        bulletUp.GetComponent<Rigidbody2D>().velocity = new Vector2(-5f, directionY * 3f); // Shoot the bullet
 
-        GameObject bulletDown = Instantiate(bulletPrefab, firePointDown.position, Quaternion.Euler(new Vector3(0, 0, 90)));
-        bulletDown.GetComponent<Rigidbody2D>().velocity = new Vector2(-5f, directionY * 3f);
+        GameObject bulletDown = Instantiate(bulletPrefab, firePointDown.position, Quaternion.Euler(new Vector3(0, 0, 90)));//Instance the Bullet
+        bulletDown.GetComponent<Rigidbody2D>().velocity = new Vector2(-5f, directionY * 3f);// Shoot the bullet
     }
 }

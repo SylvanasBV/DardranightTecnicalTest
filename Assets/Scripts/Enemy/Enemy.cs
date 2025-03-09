@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public abstract class Enemy : MonoBehaviour
 {
@@ -12,11 +11,13 @@ public abstract class Enemy : MonoBehaviour
 
 
     protected Rigidbody rb; // Rigidbody of the enemy
+    protected Animator anim; // Animator of the enemy
     protected Vector2 movementDirection; // Direction of the movement of the enemy
 
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();// Get the Rigidbody component
+        anim = GetComponent<Animator>();// Get the Animator component
     }
 
     protected abstract void Move(); // To define the movement of the especific enemy
@@ -24,12 +25,18 @@ public abstract class Enemy : MonoBehaviour
     public virtual void TakeDamage(float amount) // To take damage
     {
         health -= amount;
-        if (health <= 0) Die();
+        if (health <= 0) Die(); // If the health is less than 0, die
     }
 
     protected virtual void Die() // To destroy the enemy
     {
-        Destroy(gameObject);
+        GameManager.instanceGameManager.AddScore(scorePoints);
+        anim.SetBool("Dead", true); // Set the trigger of the die animation
+    }
+
+    public void OnDeathAnimationEnd()
+    {
+        Destroy(gameObject); // Se destruye el enemigo al final de la animación
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
@@ -41,6 +48,15 @@ public abstract class Enemy : MonoBehaviour
         else if (other.CompareTag("MapLimit"))
         {
             HandleMapCollision();
+        }
+    }
+
+    protected virtual void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            GameManager.instanceGameManager.TakeDamage(40); // Damage to the player
+            Die(); // Die the enemy
         }
     }
 
