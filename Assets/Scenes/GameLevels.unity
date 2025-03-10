@@ -7277,15 +7277,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4620417806872401376, guid: b0bae0e04b8dfd74fae52a29523de875, type: 3}
       propertyPath: waves.Array.data[0].enemyCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4620417806872401376, guid: b0bae0e04b8dfd74fae52a29523de875, type: 3}
       propertyPath: waves.Array.data[1].enemyCount
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4620417806872401376, guid: b0bae0e04b8dfd74fae52a29523de875, type: 3}
       propertyPath: waves.Array.data[2].enemyCount
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8691130589190414868, guid: b0bae0e04b8dfd74fae52a29523de875, type: 3}
       propertyPath: m_Name
