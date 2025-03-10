@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public abstract class Enemy : MonoBehaviour
 {
@@ -9,6 +8,9 @@ public abstract class Enemy : MonoBehaviour
     public float speed; // Speed of the enemy
     public int scorePoints; // Score given when the enemy is defeated
     public GameObject bulletPrefab; // Bullet prefab
+
+    public delegate void EnemyDeathHandler(); // Delegate to handle the enemy
+    public event EnemyDeathHandler OnEnemyDeath; // Event to handle the enemy
 
 
 
@@ -46,6 +48,10 @@ public abstract class Enemy : MonoBehaviour
     {
         GameManager.instanceGameManager.AddScore(scorePoints);
         anim.SetBool("Dead", true); // Set the trigger of the die animation
+        if (OnEnemyDeath != null)
+        {
+            OnEnemyDeath(); // Call the event of the enemy death
+        }
     }
 
     public void OnDeathAnimationEnd()
